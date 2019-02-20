@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragment/header :: header-bar"/>
+
+<div class="container pt-3">
+    <div class="row justify-content-sm-center">
+        <div class="col-10">
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>Barnabas Katakwa</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Contact Details</h5>
+                    <p class="card-text">
+                        Barnabas Katakwa<br>
+                        barneykatakwa@gmail.com<br>
+                        263732447112<br>
+                        2 Gardenia Crescent Msasa Park Harare Zimbabwe<br>
+                        Barnabas Katakwa is my firend...read more<br>
+                    </p>
+
+                    <a class="text-muted">barneykatakwa@gmail.com</a><button class="btn btn-primary">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragment/footer :: footer"/>
+</body>
+</html>

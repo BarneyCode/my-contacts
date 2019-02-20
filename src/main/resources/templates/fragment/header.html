@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <div th:fragment="header-css">
+        <meta charset="UTF-8">
+        <title>My Contacts</title>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+    </div>
+</head>
+<body>
+<div th:fragment="header-bar">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand">My Contacts</a>
+        <span sec:authorise="isAuthenticated()">
+            <span sec:authentication="name"></span> |
+            <span sec:authentication="principal.authorities"></span>
+            <form th:action="@{/logout}" method="post">
+            <input class="btn btn-outline-danger my-2 my-sm-0" value="Logout"/>
+            </form>
+        </span>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragment/header :: header-bar"/>
+
+<div class="container pt-3">
+    <div class="row justify-content-sm-center">
+        <div class="col-10">
+            <table class="table table-sm">
+                <caption>List of contacts</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="contact : ${contacts}">
+                    <td th:text="${contact.firstName} + ' ' + ${contact.lastName}">Banjo K</td>
+                    <td th:text="${contact.email}">b@gmail.com</td>
+                    <td th:text="${contact.phone}">263732</td>
+                    <td><a href="#" th:href="@{'/contact/' + ${contact.id}}">View</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:replace="fragment/footer :: footer"/>
+</body>
+</html>

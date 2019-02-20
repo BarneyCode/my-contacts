@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+<body>
+<div class="container">
+    <main role="main" class="inner cover">
+        <p><a th:href="@{/contact}" class="btn btn-lg btn-secondary">View My Contacts</a></p>
+        <p><a th:href="@{/contact}" class="btn btn-lg btn-secondary">View Users</a></p>
+    </main>
+</div>
+
+<div class="mastfoot" th:replace="fragment/footer :: footer"/>
+</body>
+</html>
