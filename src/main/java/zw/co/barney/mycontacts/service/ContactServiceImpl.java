@@ -1,5 +1,6 @@
 package zw.co.barney.mycontacts.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import zw.co.barney.mycontacts.model.Contact;
 import zw.co.barney.mycontacts.repository.ContactRepository;
@@ -15,6 +16,7 @@ import java.util.Optional;
  * Date     : 2/20/2019 1:09 PM
  */
 @Service
+@Slf4j
 public class ContactServiceImpl implements ContactService {
 
     private ContactRepository contactRepository;
@@ -40,7 +42,7 @@ public class ContactServiceImpl implements ContactService {
     public Contact getContact(Long id) {
         Optional<Contact> optionalContact = this.contactRepository.findById(id);
         if (!optionalContact.isPresent())
-            throw new NoSuchElementException("User with user id" + id + " was not found");
+            throw new NoSuchElementException("Contact with user id" + id + " was not found");
         return optionalContact.get();
     }
 

@@ -3,12 +3,11 @@
 <head>
     <div th:replace="fragment/header :: header-css"/>
 </head>
-<body>
+<body style="background: azure">
 <div class="container">
-    <main role="main" class="inner cover">
+    <div class="col-8 text-center">
         <p><a th:href="@{/contact}" class="btn btn-lg btn-secondary">View My Contacts</a></p>
-        <p><a th:href="@{/contact}" class="btn btn-lg btn-secondary">View Users</a></p>
-    </main>
+    </div>
 </div>
 
 <div class="mastfoot" th:replace="fragment/footer :: footer"/>

@@ -7,7 +7,8 @@
 <div th:replace="fragment/header :: header-bar"/>
 
 <div class="container pt-3">
-    <div class="row justify-content-sm-center">
+
+    <div class="row justify-content-sm-center" th:if="${not #lists.isEmpty(contacts)}">
         <div class="col-10">
             <table class="table table-sm">
                 <caption>List of contacts</caption>
@@ -16,7 +17,7 @@
                     <th scope="col">Full Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
-                    <th scope="col"></th>
+                    <th scope="col"><a th:href="@{/contact/new}">Create New Contact</a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,12 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="row  justify-content-sm-center">
+        <div class="col-10">
+        <a class="btn btn-primary btn-sm float-right" th:href="@{/contact/new}">Create New Contact</a>
         </div>
     </div>
 </div>

@@ -11,10 +11,7 @@
                 <div class="card-header">Sign in to continue</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4 text-center">
-                            <h4 class="text-center">My Contacts</h4>
-                        </div>
-                        <div class="col-md-8">
+                        <div class="col-12">
                             <form th:action="@{/login}" class="form-signin" method="post">
                                 <div th:if="${param.error}">
                                     Invalid username and password.
@@ -22,8 +19,8 @@
                                 <div th:if="${param.logout}">
                                     You have been logged out.
                                 </div>
-                                <input type="text" class="form-control mb-2" placeholder="Email" name="username" required autofocus>
-                                <input type="password" class="form-control mb-2" placeholder="Password" name="password" required>
+                                <input type="text" class="form-control mb-2" placeholder="username" name="username" required autofocus>
+                                <input type="password" class="form-control mb-2" placeholder="password" name="password" required>
                                 <input class="btn btn-lg btn-primary btn-block mb-1" type="submit">
                                 <label class="checkbox float-left">
                                     <input type="checkbox" value="remember-me">
@@ -34,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="float-right">Create an account </a>
+            <a th:href="@{/register}" class="float-right">Create an account </a>
         </div>
     </div>
 </div>

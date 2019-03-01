@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragment/header :: header-bar"/>
+
+<div class="container pt-3">
+    <div class="row justify-content-sm-center">
+        <div class="col-10">
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>Create New Contact</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Enter Contact Details</h5>
+                    <!--/*@thymesVar id="contact" type="zw.co.barney.mycontacts.model.Contact"*/-->
+                    <form th:action="@{/contact/new}" th:object="${contact}" class="form-signin" method="post">
+                        <input type="text" class="form-control mb-2" placeholder="first name"
+                               th:field="*{firstName}" name="firstName" required autofocus/>
+                        <input type="text" class="form-control mb-2" placeholder="last name"
+                               th:field="*{lastName}" name="lastName" required/>
+                        <input type="email" class="form-control mb-2" placeholder="email" th:field="*{email}"
+                               name="email" required/>
+                        <input type="tel" class="form-control mb-2" placeholder="phone" th:field="*{phone}"
+                               name="phone" required/>
+                        <textarea class="form-control mb-2" placeholder="Enter Notes Here..." th:field="*{notes}" name="notes"></textarea>
+                        <input class="btn btn-lg btn-primary btn-block mb-1" type="submit" value="Save"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragment/footer :: footer"/>
+</body>
+</html>

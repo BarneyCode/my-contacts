@@ -1,6 +1,7 @@
 package zw.co.barney.mycontacts.model;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Data
+@ToString
 public class Contact {
 
     @Id
@@ -29,8 +31,8 @@ public class Contact {
     @Lob
     private String notes;
 
-    @ManyToOne
-    private Address address;
+    @OneToOne
+    private User user;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

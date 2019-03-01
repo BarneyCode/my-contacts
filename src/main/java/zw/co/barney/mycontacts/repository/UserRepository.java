@@ -9,4 +9,6 @@ import zw.co.barney.mycontacts.model.User;
  * Date     : 2/20/2019 9:38 AM
  */
 public interface UserRepository extends CrudRepository<User, Long> {
+    User findByUsername(String username);
+    User findByEmail(String email);
 }

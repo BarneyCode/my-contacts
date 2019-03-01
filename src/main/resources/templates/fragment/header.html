@@ -14,13 +14,10 @@
 <body>
 <div th:fragment="header-bar">
     <nav class="navbar navbar-light bg-light justify-content-between">
-        <a class="navbar-brand">My Contacts</a>
+        <a th:href="@{/contact}" class="navbar-brand">My Contacts</a>
         <span sec:authorise="isAuthenticated()">
-            <span sec:authentication="name"></span> |
-            <span sec:authentication="principal.authorities"></span>
-            <form th:action="@{/logout}" method="post">
-            <input class="btn btn-outline-danger my-2 my-sm-0" value="Logout"/>
-            </form>
+            <span sec:authentication="name">barnabas</span> | <span sec:authentication="principal.authorities">USER</span>
+            <a th:href="@{/logout}" class="btn btn-danger btn-sm my-2 my-sm-0" value="Logout">Logout</a>
         </span>
     </nav>
 </div>

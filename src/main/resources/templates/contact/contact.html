@@ -2,6 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="fragment/header :: header-css"/>
+    <link rel="stylesheet">
+    <style type="text/css">
+        input {
+            border: none;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragment/header :: header-bar"/>
@@ -10,26 +17,101 @@
     <div class="row justify-content-sm-center">
         <div class="col-10">
 
-            <div class="card">
+
+            <div class="card" th:if="${contact}">
                 <div class="card-header">
-                    <h4>Barnabas Katakwa</h4>
+                    <h4 >Barnabas Katakwa</h4>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Contact Details</h5>
-                    <p class="card-text">
-                        Barnabas Katakwa<br>
-                        barneykatakwa@gmail.com<br>
-                        263732447112<br>
-                        2 Gardenia Crescent Msasa Park Harare Zimbabwe<br>
-                        Barnabas Katakwa is my firend...read more<br>
-                    </p>
+                    <h5 class="card-title"><span>Contact Details</span><button id="contact-btn" class="btn btn-primary float-right contact-btn mb-2">Edit</button></h5>
+                    <div class="card-text">
+                        <table class="table table-sm table-borderless">
 
-                    <a class="text-muted">barneykatakwa@gmail.com</a><button class="btn btn-primary">Edit</button>
+                            <input type="hidden"  id="input_user_id" th:field="*{contact.user.id}"/>
+                            <tbody>
+                            <tr>
+                                <th>First Name</th>
+                                <td><input readonly th:value="${contact.firstName}" id="input_firstName"></td>
+                            </tr>
+                            <tr>
+                                <th>Last Name</th>
+                                <td><input readonly th:value="${contact.lastName}" id="input_lastName"></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><input readonly th:value="${contact.email}" id="input_email"></td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td><input readonly th:value="${contact.phone}" id="input_phone"></td>
+                            </tr>
+                            <tr>
+                                <th>Notes</th>
+                                <td><input readonly th:value="${contact.notes}" id="input_notes"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><a id="email_muted" class="text-muted" th:text="${contact.email}">barneykatakwa@gmail.com</a></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--<span th:text="${contact.address}"></span>2 Gardenia Crescent Msasa Park Harare Zimbabwe<br>-->
+                    </div>
+
+
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 <div th:replace="fragment/footer :: footer"/>
+<script th:inline="javascript" type="text/javascript">
+    $(document).ready(function() {
+        function updateContact() {
+            var contact = {};
+            contact["id"] = /*[[${contact.id}]]*/'0' ;
+            contact["firstName"] = $('#input_firstName').val() ;
+            contact["lastName"] = $('#input_lastName').val() ;
+            contact["email"] = $('#input_email').val() ;
+            contact["phone"] = $('#input_phone').val() ;
+            contact["notes"] = $('#input_notes').val() ;
+            contact["user_id"] = $('#input_user_id').val() ;
+            $.ajax({
+                url: '/contact/update',
+                type: 'PUT',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(contact),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    console.log('SUCCESS from us: ', data);
+                },
+                error: function (e) {
+                    console.log('ERROR from us: ', e);
+
+                }
+            });
+        }
+
+        $("#contact-btn").click(function(){
+            if ($(this).text() === 'Edit'){
+                $("input").removeAttr('readonly');
+                $("input").css("border", "groove");
+                $(this).text('Save');
+            }else {
+                $("input").attr('readonly','');
+                $("input").css("border", "none");
+                $(this).text('Edit');
+                updateContact();
+            }
+        });
+
+        $("#input_email").on("keyup paste", function() {
+            $("#email_muted").text($(this).val());
+        });
+    });
+</script>
 </body>
 </html>
