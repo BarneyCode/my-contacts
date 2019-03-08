@@ -25,26 +25,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
-    public String getAllUsers(Model model) {
-        model.addAttribute("user", this.userService.getAllUsers());
-        return "show";
-    }
-
-    @GetMapping("/user/{id}")
-    public String getUser(@PathVariable Long id, Model model) {
-        model.addAttribute("user", this.userService.getUser(id));
-        return "user/show";
-    }
-
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+        log.debug("my username is"+user.getUsername());
         if (bindingResult.hasErrors()) {
             return "register";
         }
-
-            User user1 = this.userService.createUser(user);
-
+        this.userService.createUser(user);
         return "redirect:/register?success";
     }
 }

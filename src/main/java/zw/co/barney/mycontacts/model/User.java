@@ -4,9 +4,8 @@ import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import zw.co.barney.mycontacts.model.validation.PasswordPolicy;
-import zw.co.barney.mycontacts.model.validation.UniqueEmail;
-import zw.co.barney.mycontacts.model.validation.UniqueUsername;
+import zw.co.barney.mycontacts.validation.PasswordPolicy;
+import zw.co.barney.mycontacts.validation.UniqueUsername;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

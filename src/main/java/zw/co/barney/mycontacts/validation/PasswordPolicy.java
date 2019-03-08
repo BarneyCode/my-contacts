@@ -1,4 +1,4 @@
-package zw.co.barney.mycontacts.model.validation;
+package zw.co.barney.mycontacts.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,12 +10,14 @@ import java.lang.annotation.Target;
 /**
  * Project  : my-contacts
  * Developer: katakwab
- * Date     : 2/22/2019 4:56 PM
+ * Date     : 2/22/2019 4:39 PM
  */
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ElementType.METHOD,ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueEmailValidator.class)
-public @interface UniqueEmail {	String message() default "Email already exists";
+@Constraint(validatedBy = PasswordPolicyValidator.class)
+public @interface PasswordPolicy  {
+
+    String message() default "Password is not Valid";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

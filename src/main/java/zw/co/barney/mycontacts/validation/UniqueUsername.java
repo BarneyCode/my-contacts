@@ -1,4 +1,4 @@
-package zw.co.barney.mycontacts.model.validation;
+package zw.co.barney.mycontacts.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -1,7 +1,7 @@
-package zw.co.barney.mycontacts.model.validation;
+package zw.co.barney.mycontacts.validation;
 
-import org.springframework.stereotype.Component;
-import zw.co.barney.mycontacts.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import zw.co.barney.mycontacts.service.UserService;
 
 import javax.validation.ConstraintValidator;
@@ -12,30 +12,36 @@ import javax.validation.ConstraintValidatorContext;
  * Developer: katakwab
  * Date     : 2/22/2019 7:32 PM
  */
+@Slf4j
 public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, String> {
 
    private UserService userService;
+   private String message;
 
+   @Autowired
    public UniqueUsernameValidator(UserService userService) {
       this.userService = userService;
    }
+
+
+
    @Override
    public void initialize(UniqueUsername constraintAnnotation) {
+      this.message = constraintAnnotation.message();
 
    }
 
    @Override
    public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
-      //return username != null && this.userService.getUserByUsername(username) == null;
       boolean valid = true;
-      try {
-         valid = username != null && userService.getUserByUsername(username) == null;
-      } catch (Exception e) {
-
+      log.debug("trying to validate =>" + username);
+      try{
+         valid = username != null && this.userService.getUserByUsername(username) == null;
+      }catch (Exception e){
+         log.debug("an exception was caught trying to validate =>" + username);
       }
-      if (!valid) {
-         constraintValidatorContext
-                 .buildConstraintViolationWithTemplate("i do not know what it means")
+      if (!valid){
+         constraintValidatorContext.buildConstraintViolationWithTemplate(message)
                  .addConstraintViolation()
                  .disableDefaultConstraintViolation();
       }

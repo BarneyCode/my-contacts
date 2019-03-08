@@ -18,12 +18,6 @@ import zw.co.barney.mycontacts.model.User;
 @Slf4j
 public class WebPagesController {
 
-    @GetMapping({"","/","index"})
-    public String getIndexPage(Model model){
-        return "index";
-    }
-
-
     @GetMapping({"/login"})
     public String getLoginPage(Model model){
         return "login";
@@ -38,6 +32,5 @@ public class WebPagesController {
         model.addAttribute("contact", new Contact());
         return "contact/new";
     }
-
-
 }
+

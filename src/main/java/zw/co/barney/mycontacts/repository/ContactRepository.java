@@ -2,6 +2,7 @@ package zw.co.barney.mycontacts.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import zw.co.barney.mycontacts.model.Contact;
+import zw.co.barney.mycontacts.model.User;
 
 /**
  * Project  : my-contacts
@@ -10,4 +11,5 @@ import zw.co.barney.mycontacts.model.Contact;
  */
 
 public interface ContactRepository extends CrudRepository<Contact, Long> {
+    Iterable<Contact> findAllByUser(User user);
 }
