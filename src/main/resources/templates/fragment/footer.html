@@ -10,7 +10,7 @@
         <footer>
             <div class="inner">
             <!-- this is footer -->
-            &copy; <span>2019</span> Developed By Barnabas Tapiwa Katakwa
+            &copy; <span th:text="${#dates.year(#dates.createNow())}"></span> Developed By Barnabas Tapiwa Katakwa
             </div>
             <!-- todo add authenication here-->
             <script

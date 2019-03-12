@@ -12,9 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import zw.co.barney.mycontacts.service.MyContactsUserDetailsService;
+
+import javax.sql.DataSource;
 
 /**
  * Project  : my-contacts
@@ -29,8 +34,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private MyContactsUserDetailsService myContactsUserDetailsService;
 
-    public SecurityConfiguration(MyContactsUserDetailsService myContactsUserDetailsService) {
+    private DataSource dataSource;
+
+    public SecurityConfiguration(MyContactsUserDetailsService myContactsUserDetailsService, DataSource dataSource) {
         this.myContactsUserDetailsService = myContactsUserDetailsService;
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -46,12 +54,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register").permitAll()
                 .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-                .logout()
+                //.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
+                .rememberMe().tokenRepository(persistentTokenRepository())
+                .and()
+                .logout().deleteCookies("remember-me")
                 .permitAll();
+    }
+
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository(){
+        final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+        return jdbcTokenRepository;
+    }
+
+    @Override
+    protected UserDetailsService userDetailsService() {
+        return this.myContactsUserDetailsService;
     }
 
     @Override

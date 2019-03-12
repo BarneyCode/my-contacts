@@ -57,7 +57,6 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact updateContact(Contact contact) {
-        log.debug(contact.toString());
         return this.contactRepository.save(contact);
     }
 

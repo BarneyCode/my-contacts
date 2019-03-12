@@ -34,8 +34,10 @@ public class Contact {
     private String notes;
 
     @OneToOne
+    @JoinColumn(updatable=false, nullable=false)
     private User user;
 
+    @Column(updatable=false, nullable=false)
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
