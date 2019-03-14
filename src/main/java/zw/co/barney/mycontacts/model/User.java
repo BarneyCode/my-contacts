@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 import zw.co.barney.mycontacts.validation.PasswordPolicy;
+import zw.co.barney.mycontacts.validation.UniqueEmail;
 import zw.co.barney.mycontacts.validation.UniqueUsername;
 
 import javax.persistence.*;
@@ -27,24 +28,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "please enter your firstname")
+    @NotEmpty(message = "please enter your First Name")
     private String firstName;
-    @NotEmpty(message = "please enter your lastname")
+    @NotEmpty(message = "please enter your Last Name")
     private String lastName;
     @NotEmpty(message = "please enter your username")
-    @Column(unique = true)
+    @UniqueUsername
     private String username;
-    @NotEmpty(message = "please enter your password")
+    @NotEmpty(message = "please enter your Password")
     @PasswordPolicy
     private String password;
-    @NotEmpty(message = "please enter your email")
+    @NotEmpty(message = "please enter your Email")
     @Email(message = "Email provided is not valid")
-    @Column(unique = true)
+    @UniqueEmail
     private String email;
-    @NotEmpty(message = "please enter your phone number")
+    @NotEmpty(message = "please enter your Phone Number")
     private String phone;
 
 
+    @Column(updatable=false)
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

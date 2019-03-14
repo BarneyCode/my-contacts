@@ -22,6 +22,7 @@ import java.util.List;
  * Date     : 2/21/2019 10:24 AM
  */
 @Service
+@Slf4j
 public class MyContactsUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -39,6 +40,7 @@ public class MyContactsUserDetailsService implements UserDetailsService {
         if (user == null)
             throw new UsernameNotFoundException(username + " not found!");
         List<AuthGroup> authGroupList = this.authGroupRepository.findByUsername(username) ;
+        log.info(username + " log in from IP-ADDRESS");
         return new MyContactsUserPrincipal(user,authGroupList);
     }
 }

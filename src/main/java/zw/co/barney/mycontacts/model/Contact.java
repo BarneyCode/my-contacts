@@ -23,8 +23,6 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     private String firstName;
     private String lastName;
     private String email;
@@ -37,7 +35,7 @@ public class Contact {
     @JoinColumn(updatable=false, nullable=false)
     private User user;
 
-    @Column(updatable=false, nullable=false)
+    @Column(updatable=false)
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

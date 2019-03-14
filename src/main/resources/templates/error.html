@@ -15,12 +15,12 @@
                 <div class="card-body">
                     <h5 class="card-title"><span>Error Details</span></h5>
                     <div class="card-text">
-                        <ul class="list-group">
+                        <ul class="list-group list-group-flush">
                             <li class="list-group-item list-group-item-danger"><h6 th:text="${error}">Status</h6></li>
-                            <li class="list-group-item"><h6 th:text="'Status Code :' + ${status}">Status</h6></li>
-                            <li class="list-group-item"><h6 th:text="'Date :' + ${timestamp}">Status</h6></li>
-                            <li class="list-group-item"><h6 th:text="'path :' + ${path}">Status</h6></li>
-                            <li class="list-group-item"><h6 th:text="'message :' + ${message}">Status</h6></li>
+                            <li class="list-group-item"><span th:text="'Status Code :' + ${status}"></span></li>
+                            <li class="list-group-item"><span th:text="'Date :' + ${timestamp}">Status</span></li>
+                            <li class="list-group-item"><span th:text="'path :' + ${path}">Status</span></li>
+                            <li class="list-group-item"><span th:text="'message :' + ${message}">Status</span></li>
                         </ul>
                     </div>
                 </div>

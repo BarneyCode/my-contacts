@@ -27,11 +27,12 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
-        log.debug("my username is"+user.getUsername());
         if (bindingResult.hasErrors()) {
+            log.error("error creating user " + user.toString());
             return "register";
         }
         this.userService.createUser(user);
+        log.info("new user created " + user.toString());
         return "redirect:/register?success";
     }
 }
